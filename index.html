@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f7f7f7;
+}
+.chate{
+    background: #fff;
+    width: 450px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px 0;
+}
+.form{
+    padding: 25px 30px;
+}
+.chat-area header{
+    display: flex;
+    align-items: center;
+    padding: 18px 30px;
+} 
+/* .chat-area header{
+    display: flex;
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}  */
+.chat-box {
+    overflow-y: auto;
+    height: 500px;
+    background: #f7f7f7;
+    padding: 10px 30px 20px 30px;
+    box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
+                inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
+}
+.chat-box::-webkit-scrollbar{
+    width: 0px;
+}
+.chat-box .outgoing{
+    display: flex;
+}
+.chat-box .chat{
+    margin: 15px 0;
+}
+.chat-box .chat p{
+    word-wrap: break-word;
+    padding: 8px 16px;
+    box-shadow: 0 32px 32px 0 rgb(0 0 0 / 8%),
+                0 16px 16px -16px rgb(0 0 0 / 10%);
+}
+.outgoing .details{
+    margin-left: auto;
+    max-width: calc(100% - 130px);
+}
+.outgoing .details p{
+    background: #333;
+    color: #fff;
+    border-radius: 18px 18px 0 18px;
+}
+.chat-box .incoming{
+    display: flex;
+    align-items: flex-end;
+}
+.chat-box .incoming img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+.incoming .details{
+    margin-left: 10px;
+    margin-right: auto;
+    max-width: calc(100% - 130px);
+}
+.incoming .details p{
+    color: #333;
+    background: #fff;
+    border-radius: 18px 18px 18px 0;
+}
+.chat-area .typing-area{
+
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.typing-area input{
+    height: 45px;
+    width: calc(100% - 58px);
+    font-size: 17px;
+    border: 1px solid #ccc;
+    padding: 0 13px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+.typing-area button{
+    width: 55px;
+    border: none;
+    outline: none;
+    background: #333;
+    color: #fff;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <script  src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io ();
+
+        var send= function(){
+            var text =  document.getElementById('m').value;
+            socket.emit('chat message',text)
+            var divch = document.createElement('div');
+            divch.className = 'chat outgoing';
+            var det = document.createElement('div');
+            det.className = 'details'
+            
+            var li = document.createElement('p');
+            li.id = 'ok';
+            li.innerText = text ;
+            divch.appendChild(det);
+            det.appendChild(li);
+            document.getElementById('messages').appendChild(divch);
+        }
+        var receive = function(msg){
+            // var li = document.createElement('p');
+            // li.innerText = msg ;
+            // document.getElementById('messages').appendChild(li);
+
+            // var div = '<div class="chat outgoing"><div class="details"><p>'+msg+'</p></div></div>';
+            // document.getElementById('mess').appendChild(div);
+            var divch = document.createElement('div');
+            divch.className = 'chat incoming';
+            var det = document.createElement('div');
+            det.className = 'details'
+            
+            var li = document.createElement('p');
+            li.innerText = msg ;
+            divch.appendChild(det);
+            det.appendChild(li);
+            document.getElementById('messages').appendChild(divch);
+            
+        }
+        socket.on('chat message',receive)
+
+    </script>
+    <div class="chate">
+        <section class="chat-area">
+            <header>Chat io</header>
+            <div class="chat-box" id="messages">
+                <!-- <div class="chat outgoing">
+                    <div class="details">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <img src="IMG.PNG" alt="">
+                    <div class="details">
+                        <p>reponse Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div> -->
+            </div>
+            <div class="typing-area">
+                <input type="text" placeholder="Tapez le message" id="m">
+                <button onclick="send()"><i class="fab fa-telegram-plane">Envoi</i></button>
+            </div> 
+        </section>
+        
+    </div>
+</body>
+</html>

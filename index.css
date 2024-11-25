@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f7f7f7;
+}
+.chate{
+    background: #fff;
+    width: 450px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px 0;
+}
+.form{
+    padding: 25px 30px;
+}
+.chat-area header{
+    display: flex;
+    align-items: center;
+    padding: 18px 30px;
+} 
+/* .chat-area header{
+    display: flex;
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}  */
+.chat-box {
+    overflow-y: auto;
+    height: 500px;
+    background: #f7f7f7;
+    padding: 10px 30px 20px 30px;
+    box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
+                inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
+}
+.chat-box::-webkit-scrollbar{
+    width: 0px;
+}
+.chat-box .outgoing{
+    display: flex;
+}
+.chat-box .chat{
+    margin: 15px 0;
+}
+.chat-box .chat p{
+    word-wrap: break-word;
+    padding: 8px 16px;
+    box-shadow: 0 32px 32px 0 rgb(0 0 0 / 8%),
+                0 16px 16px -16px rgb(0 0 0 / 10%);
+}
+.outgoing .details{
+    margin-left: auto;
+    max-width: calc(100% - 130px);
+}
+.outgoing .details p{
+    background: #333;
+    color: #fff;
+    border-radius: 18px 18px 0 18px;
+}
+.chat-box .incoming{
+    display: flex;
+    align-items: flex-end;
+}
+.chat-box .incoming img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+.incoming .details{
+    margin-left: 10px;
+    margin-right: auto;
+    max-width: calc(100% - 130px);
+}
+.incoming .details p{
+    color: #333;
+    background: #fff;
+    border-radius: 18px 18px 18px 0;
+}
+.chat-area .typing-area{
+
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.typing-area input{
+    height: 45px;
+    width: calc(100% - 58px);
+    font-size: 17px;
+    border: 1px solid #ccc;
+    padding: 0 13px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+.typing-area button{
+    width: 55px;
+    border: none;
+    outline: none;
+    background: #333;
+    color: #fff;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
